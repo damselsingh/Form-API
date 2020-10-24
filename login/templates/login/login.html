@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        body{
+            background-color: cadetblue;
+            text-align: center;
+        }
+        .success{
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login yourself below</h1>
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for forms in form %}
+               {{forms.label_tag}}
+               {{forms}} 
+               <small class="red">{{forms.errors|striptags}} </small><br><br>
+             {% endfor %}
+             <input type="submit" value="login">
+             <a href="{% url 'signup' %}" type="button" >Signup</a>
+       </form>
+       {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="{{message.tags}} success"> {{message}} {% endif %}</small>
+        {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
